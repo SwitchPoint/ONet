@@ -41,8 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client\KnownHosts.cs" />
+    <Compile Include="Client\Client.cs" />
+    <Compile Include="Client\IHostProvider.cs" />
+    <Compile Include="Client\InitialHosts.cs" />
     <Compile Include="File\Reader.cs" />
+    <Compile Include="Network\Host.cs" />
+    <Compile Include="Network\INetworkProvider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\IRandomGenerator.cs" />

@@ -10,8 +10,7 @@ namespace SwitchPoint.ONet.Tests.Client
         [TestMethod]
         public void TestReadHosts(string File)
         {
-            String all = KnownHosts.ReadAll();
-
+           
         }
     }
 }

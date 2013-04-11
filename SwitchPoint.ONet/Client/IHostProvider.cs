@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SwitchPoint.ONet.Client
 {
-    public class KnownHosts
+    interface IHostProvider
     {
-        public static String ReadAll()
-        {
-            
-            return "";
-        }
+        Network.Host GetRandomHost();
     }
 }
