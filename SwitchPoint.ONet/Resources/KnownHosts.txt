@@ -1,0 +1,2 @@
+﻿ localhost:12345
+ google.com:12348

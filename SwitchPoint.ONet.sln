@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwitchPoint.ONet", "SwitchPoint.ONet\SwitchPoint.ONet.csproj", "{790D53A5-5174-42FE-B211-D64B560729B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwitchPoint.ONet.Tests", "SwitchPoint.ONet.Tests\SwitchPoint.ONet.Tests.csproj", "{9C12399C-1105-4250-8917-70EE327C15DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{790D53A5-5174-42FE-B211-D64B560729B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{790D53A5-5174-42FE-B211-D64B560729B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{790D53A5-5174-42FE-B211-D64B560729B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{790D53A5-5174-42FE-B211-D64B560729B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C12399C-1105-4250-8917-70EE327C15DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C12399C-1105-4250-8917-70EE327C15DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C12399C-1105-4250-8917-70EE327C15DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C12399C-1105-4250-8917-70EE327C15DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
