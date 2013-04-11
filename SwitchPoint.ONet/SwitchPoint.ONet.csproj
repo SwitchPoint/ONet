@@ -45,6 +45,8 @@
     <Compile Include="File\Reader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\IRandomGenerator.cs" />
+    <Compile Include="Util\SimpleRandom.cs" />
     <Compile Include="Util\StringUtils.cs" />
   </ItemGroup>
   <ItemGroup>
