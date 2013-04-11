@@ -13,13 +13,16 @@ namespace SwitchPoint.ONet.Client
         {
             String HostsFileLocation = "";
             IHostProvider InitialHosts = new InitialHosts(HostsFileLocation);
-
-
-            Host FirstConnection = InitialHosts.GetRandomHost();
             INetworkProvider Provider = new ConnectionManager();
 
-            Provider.ConnectToHost(FirstConnection);
+            MakeFirstConnection(InitialHosts,Provider);
 
+        }
+
+        private void MakeFirstConnection(IHostProvider InitialHosts, INetworkProvider Provider)
+        {
+            Host FirstConnection = InitialHosts.GetRandomHost();
+            Provider.ConnectToHost(FirstConnection);
         }
     }
 }
