@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace SwitchPoint.ONet.Network
 {
-    public interface INetworkProvider
+    class ConnectionManager : INetworkProvider
     {
-        void ConnectToHost(Host Host);
+        public void ConnectToHost(Host Host)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
