@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace SwitchPoint.ONet.Network
 {
-    class NetworkMessageEvent : EventArgs
+    public class NetworkMessageEvent : EventArgs
     {
         string Message;
         public NetworkMessageEvent(string Message)
         {
             this.Message = Message;
+        }
+
+        public string ReceivedMessage()
+        {
+            return Message;
         }
     }
 }

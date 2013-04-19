@@ -53,6 +53,7 @@
     <Compile Include="Client\UnitTest1.cs" />
     <Compile Include="File\ReaderTest.cs" />
     <Compile Include="Network\NetworkTest.cs" />
+    <Compile Include="Network\TCPNetworkProviderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\SimpleRandomGeneratorMock.cs" />
     <Compile Include="Util\StringTest.cs" />

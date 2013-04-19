@@ -9,14 +9,15 @@ using System.Threading.Tasks;
 
 namespace SwitchPoint.ONet.Network
 {
-    class TCPNetworkProvider : INetworkProvider
+    public class TCPNetworkProvider : INetworkProvider
     {
         private TcpListener tcpListener;
         private Thread listenThread;
 
-        public TCPNetworkProvider()
+
+        public TCPNetworkProvider(int Port)
         {
-            this.tcpListener = new TcpListener(IPAddress.Any, 3000);
+            this.tcpListener = new TcpListener(IPAddress.Any, Port);
             this.listenThread = new Thread(new ThreadStart(ListenForClients));
             this.listenThread.Start();
         }
@@ -35,9 +36,12 @@ namespace SwitchPoint.ONet.Network
                    
                     ClientConnect(this, null);
                 }
-                
-                Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
-                clientThread.Start(client);
+
+              
+                    Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
+                    clientThread.Start(client);
+                    
+              
             }
         }
 

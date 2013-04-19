@@ -12,5 +12,11 @@ namespace SwitchPoint.ONet.Network
         {
             throw new NotImplementedException();
         }
+
+        public event EventHandler ClientConnect;
+
+        public event EventHandler ClientDisconnect;
+
+        public event EventHandler MessageReceived;
     }
 }
