@@ -30,8 +30,12 @@ namespace SwitchPoint.ONet.Network
                 //blocks until a client has connected to the server
                 TcpClient client = this.tcpListener.AcceptTcpClient();
 
-                //create a thread to handle communication 
-                //with connected client
+                if (ClientConnect != null)
+                {
+                   
+                    ClientConnect(this, null);
+                }
+                
                 Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
                 clientThread.Start(client);
             }
@@ -68,7 +72,11 @@ namespace SwitchPoint.ONet.Network
 
                 //message has successfully been received
                 ASCIIEncoding encoder = new ASCIIEncoding();
-                System.Diagnostics.Debug.WriteLine(encoder.GetString(message, 0, bytesRead));
+
+                if (MessageReceived != null)
+                {
+                    MessageReceived(this, new NetworkMessageEvent(encoder.GetString(message, 0, bytesRead)));
+                }
             }
 
             tcpClient.Close();
@@ -78,5 +86,11 @@ namespace SwitchPoint.ONet.Network
         {
             
         }
+
+        public event EventHandler ClientConnect;
+
+        public event EventHandler ClientDisconnect;
+
+        public event EventHandler MessageReceived;
     }
 }

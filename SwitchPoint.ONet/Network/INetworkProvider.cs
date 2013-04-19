@@ -8,6 +8,10 @@ namespace SwitchPoint.ONet.Network
 {
     public interface INetworkProvider
     {
+        event EventHandler ClientConnect;
+        event EventHandler ClientDisconnect;
+        event EventHandler MessageReceived;
+
         void ConnectToHost(Host Host);
     }
 }
