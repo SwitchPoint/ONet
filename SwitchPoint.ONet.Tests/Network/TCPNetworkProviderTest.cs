@@ -16,7 +16,7 @@ namespace SwitchPoint.ONet.Tests.Network
     public class TCPNetworkProviderTest
     {
         [TestMethod]
-        public void SouldRaiseConnectEvent()
+        public void ShouldRaiseConnectEvent()
         {
             int Port = new Random().Next(5000, 7000);
             bool EventRaised = false;
@@ -48,7 +48,7 @@ namespace SwitchPoint.ONet.Tests.Network
 
 
         [TestMethod]
-        public void SouldRaiseMessageEvent()
+        public void ShouldRaiseMessageEvent()
         {
             AutoResetEvent mutex = new AutoResetEvent(false);
             int Port = new Random().Next(5000, 7000);
@@ -89,6 +89,61 @@ namespace SwitchPoint.ONet.Tests.Network
 
 
       
+
+
+        }
+
+
+        [TestMethod]
+        public void ShouldRaiseReceiveLongMessage()
+        {
+            AutoResetEvent mutex = new AutoResetEvent(false);
+            int Port = new Random().Next(5000, 7000);
+            bool EventRaised = false;
+            string Message = "";
+            string ReceivedMessage = "";
+
+
+            for (int i = 0; i < 5000; i++)
+            {
+                Message = Message + "a";
+            }
+
+
+
+            TCPNetworkProvider Provider = new TCPNetworkProvider(Port);
+
+            Provider.MessageReceived += (object sender, EventArgs e) =>
+            {
+                Assert.IsInstanceOfType(e, typeof(NetworkMessageEvent));
+
+                EventRaised = true;
+                ReceivedMessage = ((NetworkMessageEvent)e).ReceivedMessage();
+                mutex.Set();
+            };
+
+
+
+            TcpClient client = new TcpClient();
+            IPEndPoint serverEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), Port);
+            client.Connect(serverEndPoint);
+
+
+            NetworkStream clientStream = client.GetStream();
+
+            ASCIIEncoding encoder = new ASCIIEncoding();
+            byte[] buffer = encoder.GetBytes(Message);
+
+            clientStream.Write(buffer, 0, buffer.Length);
+            clientStream.Flush();
+            mutex.WaitOne();
+            client.Close();
+
+            Assert.IsTrue(EventRaised);
+
+
+
+
 
 
         }
