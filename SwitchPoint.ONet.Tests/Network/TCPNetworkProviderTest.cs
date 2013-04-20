@@ -61,6 +61,49 @@ namespace SwitchPoint.ONet.Tests.Network
 
         }
 
+        public void ShouldAddClientToList()
+        {
+            int Port = new Random().Next(5000, 50000);
+            AutoResetEvent mutex = new AutoResetEvent(false);
+
+            TCPNetworkProvider Provider = new TCPNetworkProvider(Port);
+
+            Provider.ClientConnect += (object sender, EventArgs e) =>
+            {
+                EventRaised = true;
+                mutex.Set();
+            };
+
+
+
+            TcpClient client = new TcpClient();
+            IPEndPoint serverEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), Port);
+            client.Connect(serverEndPoint);
+
+
+
+            NetworkStream clientStream = client.GetStream();
+
+            ASCIIEncoding encoder = new ASCIIEncoding();
+            byte[] buffer = encoder.GetBytes("hi");
+
+            clientStream.Write(buffer, 0, buffer.Length);
+            clientStream.Flush();
+
+
+
+            mutex.WaitOne();
+            client.Close();
+
+            Provider.Stop();
+
+            Assert.AreEqual(1, Provider.ActiveConnections().Count);
+
+
+
+
+        }
+
 
         [TestMethod]
         

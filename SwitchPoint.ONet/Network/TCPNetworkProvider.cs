@@ -13,13 +13,19 @@ namespace SwitchPoint.ONet.Network
     {
         private TcpListener tcpListener;
         private Thread listenThread;
-        
+        private List<TcpClient> clients;
 
         public TCPNetworkProvider(int Port)
         {
             this.tcpListener = new TcpListener(IPAddress.Any, Port);
             this.listenThread = new Thread(new ThreadStart(ListenForClients));
             this.listenThread.Start();
+            clients = new List<TcpClient>();
+        }
+
+        public List<TcpClient> ActiveConnections()
+        {
+            return clients;
         }
 
         private void ListenForClients()
@@ -53,6 +59,9 @@ namespace SwitchPoint.ONet.Network
         private void HandleClientComm(object client)
         {
             TcpClient tcpClient = (TcpClient)client;
+
+            clients.Add(tcpClient); 
+
             NetworkStream clientStream = tcpClient.GetStream();
 
             byte[] message = new byte[4096];
