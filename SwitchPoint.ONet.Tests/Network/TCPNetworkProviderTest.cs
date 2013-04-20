@@ -16,9 +16,10 @@ namespace SwitchPoint.ONet.Tests.Network
     public class TCPNetworkProviderTest
     {
         [TestMethod]
+        
         public void ShouldRaiseConnectEvent()
         {
-            int Port = new Random().Next(5000, 7000);
+            int Port = new Random().Next(5000, 50000);
             bool EventRaised = false;
             AutoResetEvent mutex = new AutoResetEvent(false);
 
@@ -34,9 +35,23 @@ namespace SwitchPoint.ONet.Tests.Network
             TcpClient client = new TcpClient();
             IPEndPoint serverEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), Port);
             client.Connect(serverEndPoint);
+
+
+
+            NetworkStream clientStream = client.GetStream();
+
+            ASCIIEncoding encoder = new ASCIIEncoding();
+            byte[] buffer = encoder.GetBytes("hi");
+
+            clientStream.Write(buffer, 0, buffer.Length);
+            clientStream.Flush();
+
+
+
             mutex.WaitOne();
             client.Close();
 
+            Provider.Stop();
 
             Assert.IsTrue(EventRaised);
 
@@ -48,6 +63,7 @@ namespace SwitchPoint.ONet.Tests.Network
 
 
         [TestMethod]
+        
         public void ShouldRaiseMessageEvent()
         {
             AutoResetEvent mutex = new AutoResetEvent(false);
@@ -84,6 +100,8 @@ namespace SwitchPoint.ONet.Tests.Network
             mutex.WaitOne();
             client.Close();
 
+
+            Provider.Stop();
             Assert.IsTrue(EventRaised);
 
 
@@ -95,6 +113,7 @@ namespace SwitchPoint.ONet.Tests.Network
 
 
         [TestMethod]
+        
         public void ShouldRaiseReceiveLongMessage()
         {
             AutoResetEvent mutex = new AutoResetEvent(false);
@@ -104,7 +123,7 @@ namespace SwitchPoint.ONet.Tests.Network
             string ReceivedMessage = "";
 
 
-            for (int i = 0; i < 5000; i++)
+            for (int i = 0; i < 100000; i++)
             {
                 Message = Message + "a";
             }
@@ -138,7 +157,7 @@ namespace SwitchPoint.ONet.Tests.Network
             clientStream.Flush();
             mutex.WaitOne();
             client.Close();
-
+            Provider.Stop();
             Assert.IsTrue(EventRaised);
 
 

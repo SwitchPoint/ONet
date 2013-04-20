@@ -13,7 +13,7 @@ namespace SwitchPoint.ONet.Network
     {
         private TcpListener tcpListener;
         private Thread listenThread;
-
+        
 
         public TCPNetworkProvider(int Port)
         {
@@ -38,11 +38,16 @@ namespace SwitchPoint.ONet.Network
                 }
 
               
-                    Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
-                    clientThread.Start(client);
+                Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
+                clientThread.Start(client);
                     
               
             }
+        }
+
+        public void Stop()
+        {
+            tcpListener.Stop();
         }
 
         private void HandleClientComm(object client)

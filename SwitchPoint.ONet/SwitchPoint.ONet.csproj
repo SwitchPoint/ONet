@@ -48,7 +48,9 @@
     <Compile Include="Network\ConnectionManager.cs" />
     <Compile Include="Network\Host.cs" />
     <Compile Include="Network\INetworkProvider.cs" />
+    <Compile Include="Network\ITCPClient.cs" />
     <Compile Include="Network\NetworkMessageEvent.cs" />
+    <Compile Include="Network\TCPClientAdapter.cs" />
     <Compile Include="Network\TCPNetworkProvider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
