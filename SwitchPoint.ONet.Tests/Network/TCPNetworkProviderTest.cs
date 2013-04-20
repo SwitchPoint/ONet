@@ -70,7 +70,7 @@ namespace SwitchPoint.ONet.Tests.Network
 
             Provider.ClientConnect += (object sender, EventArgs e) =>
             {
-                EventRaised = true;
+               
                 mutex.Set();
             };
 
