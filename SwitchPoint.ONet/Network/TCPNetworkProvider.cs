@@ -13,19 +13,28 @@ namespace SwitchPoint.ONet.Network
     {
         private TcpListener tcpListener;
         private Thread listenThread;
-        private List<TcpClient> clients;
+        private List<TcpClientAdapter> clients;
 
         public TCPNetworkProvider(int Port)
         {
             this.tcpListener = new TcpListener(IPAddress.Any, Port);
             this.listenThread = new Thread(new ThreadStart(ListenForClients));
             this.listenThread.Start();
-            clients = new List<TcpClient>();
+            clients = new List<TcpClientAdapter>();
         }
 
-        public List<TcpClient> ActiveConnections()
+        public List<TcpClientAdapter> ActiveConnections()
         {
             return clients;
+        }
+
+        public void Send(string Message)
+        {
+            foreach (var client in clients)
+            {
+                
+            }
+
         }
 
         private void ListenForClients()
@@ -35,7 +44,7 @@ namespace SwitchPoint.ONet.Network
             while (true)
             {
                 //blocks until a client has connected to the server
-                TcpClient client = this.tcpListener.AcceptTcpClient();
+                TcpClientAdapter client = new TcpClientAdapter(this.tcpListener.AcceptTcpClient());
 
                 if (ClientConnect != null)
                 {
@@ -58,7 +67,7 @@ namespace SwitchPoint.ONet.Network
 
         private void HandleClientComm(object client)
         {
-            TcpClient tcpClient = (TcpClient)client;
+            TcpClientAdapter tcpClient = (TcpClientAdapter)client;
 
             clients.Add(tcpClient); 
 
