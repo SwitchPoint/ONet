@@ -32,7 +32,7 @@ namespace SwitchPoint.ONet.Network
         {
             foreach (var client in clients)
             {
-                
+                client.Send(Message);
             }
 
         }
@@ -49,7 +49,7 @@ namespace SwitchPoint.ONet.Network
                 if (ClientConnect != null)
                 {
                    
-                    ClientConnect(this, null);
+                    ClientConnect(this, new ClientConnectEvent(client));
                 }
 
               

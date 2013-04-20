@@ -45,6 +45,7 @@
     <Compile Include="Client\IHostProvider.cs" />
     <Compile Include="Client\InitialHosts.cs" />
     <Compile Include="File\Reader.cs" />
+    <Compile Include="Network\ClientConnectEvent.cs" />
     <Compile Include="Network\ConnectionManager.cs" />
     <Compile Include="Network\Host.cs" />
     <Compile Include="Network\INetworkProvider.cs" />
