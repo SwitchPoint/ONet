@@ -18,7 +18,7 @@ namespace SwitchPoint.ONet.Tests.Network
 
 
         [TestMethod]
-        public void ShouldSplitHostNameInEndPoint()
+        public void ShouldReturnHostNameEndPoint()
         {
             string Vector = "localhost:1234";
             Host Host = new Host(Vector);
@@ -38,13 +38,23 @@ namespace SwitchPoint.ONet.Tests.Network
 
 
         [TestMethod]
-        public void ShouldSplitIPv4Address()
+        public void ShouldReturnIPv4EndPoint()
         {
             string Vector = "172.16.1.1:1234";
             Host Host = new Host(Vector);
 
             Assert.AreEqual("172.16.1.1", Host.HostName);
             Assert.AreEqual(1234, Host.Port);
+        }
+
+
+        [TestMethod]
+        public void ShouldSplitIPv4Address()
+        {
+            string Vector = "172.16.1.1:1234";
+            Host Host = new Host(Vector);
+
+            Assert.AreEqual("172.16.1.1", Host.Endpoint().Address.ToString());
         }
 
         [TestMethod]
@@ -55,6 +65,15 @@ namespace SwitchPoint.ONet.Tests.Network
 
             Assert.AreEqual("[2001:db8::1]", Host.HostName);
             Assert.AreEqual(1234, Host.Port);
+        }
+
+        [TestMethod]
+        public void ShouldReturnRFC3986IPv6EndPoint()
+        {
+            string Vector = "[2001:db8::1]:1234";
+            Host Host = new Host(Vector);
+
+            Assert.AreEqual("2001:db8::1", Host.Endpoint().Address.ToString());
         }
 
 
