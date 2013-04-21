@@ -47,7 +47,7 @@ namespace SwitchPoint.ONet.Tests.Util
         {
             Random rand = new Random();
             String[] input = new String[] { "a", "b", "c" };
-            int randomNumber = rand.Next(input.Length - 1);
+            int randomNumber = rand.Next(input.Length-1);
 
             IRandomGenerator generator = new SimpleRandomGeneratorMock(randomNumber);
 

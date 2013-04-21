@@ -16,6 +16,27 @@ namespace SwitchPoint.ONet.Tests.Network
             Assert.AreEqual(1234, Host.Port);
         }
 
+
+        [TestMethod]
+        public void ShouldSplitHostNameInEndPoint()
+        {
+            string Vector = "localhost:1234";
+            Host Host = new Host(Vector);
+            var ep = Host.Endpoint();
+
+            try
+            {
+                Assert.AreEqual("127.0.0.1", Host.Endpoint().Address.ToString());
+            }
+            catch (AssertFailedException)
+            {
+                Assert.AreEqual("::1", Host.Endpoint().Address.ToString());
+            }
+        }
+
+
+
+
         [TestMethod]
         public void ShouldSplitIPv4Address()
         {
